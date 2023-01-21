@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema({
     title: String,
     start: Date,
     _id: Number,
-    display: String,
+    valid: Boolean,
 })
 const CalendarEvent = mongoose.model('Event', eventSchema);
 
@@ -36,7 +36,7 @@ app.post("/addEvent", async (req, res) => {
     const stud = await Student.findById(req.body.title);
     if (stud) {
         try {
-            const ev = new CalendarEvent({ title: req.body.title, start: new Date(req.body.start), _id: Number(req.body.id), display: req.body.display })
+            const ev = new CalendarEvent({ title: req.body.title, start: new Date(req.body.start), _id: Number(req.body.id), valid: true })
             ev.save((err, r) => {
                 if (err){ 
                     console.log(err)
@@ -58,7 +58,7 @@ app.get("/getEvents", async (req, res) => {
 })
 
 app.get("/removeEvent", async (req, res) => {
-    const arr = await CalendarEvent.deleteOne({ _id: req.query.id });
+    const arr = await CalendarEvent.updateOne({ _id: req.query.id }, {valid: false});
     res.status(200).json(arr);
 })
 
