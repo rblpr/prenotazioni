@@ -71,7 +71,15 @@ app.post("/addStudent", async (req, res) => {
 })
 
 app.get("/getStudents", async (req, res) => {
-    if(req.query.psw != 31850) res.status(403).json("error");
+    if(req.query.psw != 190909) {
+        res.status(403).json("error");
+        return 
+    }
     const arr = await Student.find({});
     res.status(200).json(arr);
+})
+
+app.get("/checkAuth", (req, res) => {
+    if(req.query.psw != 190909) res.status(403).json("error");
+    else res.status(200).json(ok);
 })

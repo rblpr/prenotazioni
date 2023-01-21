@@ -12,8 +12,8 @@
 
 <body class="px-5 pt-2">
     <div id='calendar'></div>
-
-    <div id="secretDiv" class="mt-2">
+    <div id="gestioneBtn"><button class="btn btn-light">gestione</button></div>
+    <div id="secretDiv" class="mt-2 d-none">
         <button class="btn btn-light" id="credBtn">Aggiungi credenziali</button>
         <button class="btn btn-light" id="namesBtn">Visualizza nomi</button>
         <label for="check" class="">Aggiungi blocco</label>
@@ -180,6 +180,22 @@
 
 
 
+        })
+
+
+        document.querySelector("#gestioneBtn").addEventListener("click", e => {
+            e.preventDefault();
+            let psw = prompt("Inserire password");
+
+            fetch("getStudents?psw=" + psw).then(res => {
+                if (res.status == 200) {
+                    document.querySelector("#secretDiv").classList.remove("d-none");
+                }
+                else {
+                    alert("Password errata");
+                    return null;
+                }
+            })
         })
 
 
