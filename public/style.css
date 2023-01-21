@@ -1,0 +1,21 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+#calendar {
+    max-width: 1100px;
+    max-height: 80vh;
+    margin: 40px auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+button[title="Previous week"], button[title="Next week"], button[title="This week"]  {
+    background-color: var(--bs-blue)!important;
+    border-color: var(--bs-blue) !important;
+}
